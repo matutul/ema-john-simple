@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData';
+import Product from '../Product/Product';
 
 const ProductDetails = () => {
+    const [product, setProduct] = useState([]);
     const { productKey } = useParams();
-    console.log(productKey);
-    const product = fakeData.find(pd => pd.key === productKey);
-    console.log(fakeData);
-    console.log(product);
+    useEffect(() => {
+        const selectedProduct = fakeData.find(pd => pd.key === productKey);
+        console.log(selectedProduct);
+        setProduct(selectedProduct);
+    }, [])
     return (
         <div>
-            <h2>{productKey} comming soon</h2>
+            <Product showAddtoBtn={false} product={product}></Product>
         </div>
     );
 };

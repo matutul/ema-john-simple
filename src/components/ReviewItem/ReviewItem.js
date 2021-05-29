@@ -1,13 +1,10 @@
 import React from 'react';
-import './Product.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
+const ReviewItem = (props) => {
+    const { name, img, seller, price, key, quantity } = props.product;
+    const handleRemoveItem = props.handleRemoveItem;
 
-const Product = (props) => {
-    const { name, img, seller, price, key } = props.product || {};
-    const showAddtoBtn = props.showAddtoBtn;
     return (
         <div className="product">
             <div className="product-image">
@@ -19,6 +16,7 @@ const Product = (props) => {
                     <div className="left">
                         <p><small>By {seller}</small></p>
                         <p>Price: ${price}</p>
+                        <p>Quantity: {quantity}</p>
                     </div>
                     <div className="right">
                         <h4>Features:</h4>
@@ -27,18 +25,12 @@ const Product = (props) => {
                         </ul>
                     </div>
                 </div>
-                {
-                    showAddtoBtn &&
-                    <button
-                        className="order-btn"
-                        onClick={() => props.addProductHandler(props.product)}
-                    >
-                        <FontAwesomeIcon icon={faShoppingCart} /> Add to cart
-                    </button>
-                }
+                <button onClick={() => handleRemoveItem(key)} className="order-btn">
+                    Remove Item
+                </button>
             </div>
         </div>
     );
 };
 
-export default Product;
+export default ReviewItem;
