@@ -1,15 +1,15 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
+import Review from './components/Review/Review';
+import NotFound from './components/NotFound/NotFound';
+import Contact from './components/Contact/Contact';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import Review from './components/Review/Review';
-import NotFound from './components/NotFound/NotFound';
-import Contact from './components/Contact/Contact';
-import ProductDetails from './components/ProductDetails/ProductDetails';
 
 function App() {
   return (
@@ -18,22 +18,22 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Shop></Shop>
+          <Shop/>
         </Route>
         <Route path="/shop">
-          <Shop></Shop>
+          <Shop/>
         </Route>
         <Route path="/review">
-          <Review></Review>
+          <Review/>
         </Route>
         <Route path="/contact">
-          <Contact></Contact>
+          <Contact/>
         </Route>
-        <Route exact path="/product/:productKey">
-          <ProductDetails></ProductDetails>
+        <Route path="/product/:productKey">
+          <ProductDetails/>
         </Route>
         <Route path="*">
-          <NotFound></NotFound>
+          <NotFound/>
         </Route>
       </Switch>
     </Router>
