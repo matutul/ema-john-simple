@@ -10,7 +10,7 @@ const ProductDetails = () => {
         const selectedProduct = fakeData.find(pd => pd.key === productKey);
         console.log(selectedProduct);
         setProduct(selectedProduct);
-    }, [])
+    }, [productKey])
     return (
         <div>
             <Product showAddtoBtn={false} product={product}></Product>

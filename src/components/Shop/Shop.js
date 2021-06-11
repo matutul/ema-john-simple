@@ -15,25 +15,29 @@ const Shop = () => {
         setProducts(pd);
     }, [])
 
-    // const [savedProduct, setSavedProduct] = useState(getDatabaseCart());
+
     useEffect(() => {
         const savedProduct = getDatabaseCart();
+        console.log(savedProduct);
         const savedProductKey = Object.keys(savedProduct);
+        console.log(savedProductKey);
         const addedToBeCart = savedProductKey.map(key => {
-            const product = fakeData.find(pd => pd.key === key) || {};
+            const product = fakeData.find(pd => key === pd.key);
             product.quantity = savedProduct[key];
             return product;
         });
         setCart(addedToBeCart);
     }, [])
-    console.log(cart);
-    // console.log(products);
+
+
     const addProductHandler = (product) => {
+        console.log(product);
+        console.log(cart);
         const existingProduct = cart.find(pd => pd.key === product.key);
-        // console.log(existingProduct);
         if (existingProduct) {
             existingProduct.quantity = existingProduct.quantity + 1;
-            const newCart = cart.filter(pd => pd.key !== existingProduct.key);
+            let newCart = cart.filter(pd => pd.key !== existingProduct.key);
+            newCart = [...newCart, existingProduct];
             setCart(newCart);
             addToDatabaseCart(existingProduct.key, existingProduct.quantity);
         }
@@ -43,12 +47,8 @@ const Shop = () => {
             setCart(newCart);
             addToDatabaseCart(product.key, product.quantity);
         }
-        // const newCart = [...cart, product];
-        // setCart(newCart);
-        // const sameProduct = newCart.filter(pd => pd.key === product.key);
-        // const count = sameProduct.length;
-        // addToDatabaseCart(product.key);
     }
+
     return (
         <div className='shop-container'>
             <div className="product-container">

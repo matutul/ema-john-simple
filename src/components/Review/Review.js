@@ -7,12 +7,10 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 const Review = () => {
     const [savedCart, setSavedCart] = useState([]);
     useEffect(() => {
-        const savedProduct = getDatabaseCart() || {};
-        // console.log(savedProduct);
+        const savedProduct = getDatabaseCart();
         const savedProductKey = Object.keys(savedProduct);
         const product = savedProductKey.map(key => {
-            const cartProduct = fakeData.find(pd => pd.key === key) || {};
-            // console.log(cartProduct);
+            const cartProduct = fakeData.find(pd => pd.key === key);
             cartProduct.quantity = savedProduct[key];
             return cartProduct;
         })
@@ -25,7 +23,6 @@ const Review = () => {
         setSavedCart(newCart);
         removeFromDatabaseCart(productKey);
     }
-    // console.log(savedCart);
     return (
         <div className='shop-container'>
             <div className="product-container">
