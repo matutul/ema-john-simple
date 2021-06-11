@@ -13,31 +13,30 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header></Header>
-      <Router>
-        <Switch>
+
+      <Switch>
         <Route exact path="/">
-            <Shop></Shop>
-          </Route>
-          <Route path="/shop">
-            <Shop></Shop>
-          </Route>
-          <Route path="/review">
-            <Review></Review>
-          </Route>          
-          <Route path="/contact">
-            <Contact></Contact>
-          </Route>
-          <Route exact path="/product/:productKey">
-            <ProductDetails></ProductDetails>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+          <Shop></Shop>
+        </Route>
+        <Route path="/shop">
+          <Shop></Shop>
+        </Route>
+        <Route path="/review">
+          <Review></Review>
+        </Route>
+        <Route path="/contact">
+          <Contact></Contact>
+        </Route>
+        <Route exact path="/product/:productKey">
+          <ProductDetails></ProductDetails>
+        </Route>
+        <Route path="*">
+          <NotFound></NotFound>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
