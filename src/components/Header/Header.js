@@ -5,7 +5,7 @@ import { UserContext } from '../../App';
 import logo from '../../images/logo.png';
 import './Header.css';
 const Header = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser] = useContext(UserContext);
     return (
         <div className="header">
             <img src={logo} alt="The brand logo of the ema-john-simple site" />

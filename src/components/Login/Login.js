@@ -23,7 +23,7 @@ const Login = () => {
         email: '',
         password: ''
     });
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [ , setLoggedInUser] = useContext(UserContext);
 
     const history = useHistory();
     const location = useLocation();
@@ -179,7 +179,7 @@ const Login = () => {
                     <Button variant="light" onClick={handleGoogleSignIn} className="signing-btn">
                         <img className="btn-icon" src={googleIcon} alt="" /><span className="btn-txt"> Continue with Google</span>
                     </Button>
-                    <Button className="signing-btn" variant="light" onClick={handleFacebookSignIn} className="signing-btn">
+                    <Button className="signing-btn" variant="light" onClick={handleFacebookSignIn}>
                         <img className="btn-icon" src={facebookIcon} alt="" /> <span className="btn-txt"> Continue with Facebook</span>
                     </Button>
                 </form>
