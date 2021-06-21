@@ -11,6 +11,17 @@
     padding: 10px 10%;
     text-align: left;
 }
+.user-div{
+    display: inline;
+}
+.user-name{
+    float: right;
+    color: rgb(255, 244, 87);
+    margin: 0;
+    padding: 10px;
+    font-weight: 500;
+    
+}
 nav a{
     text-decoration: none;
     color: white;

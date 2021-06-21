@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import fakeData from '../../fakeData';
 import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
@@ -23,6 +24,12 @@ const Review = () => {
         setSavedCart(newCart);
         removeFromDatabaseCart(productKey);
     }
+
+    const history = useHistory();
+    const handleProceedCheckout = () => {
+        history.push("/shipment");
+    }
+
     return (
         <div className='shop-container'>
             <div className="product-container">
@@ -32,7 +39,7 @@ const Review = () => {
             </div>
             <div className="cart-container">
                 <Cart cart={savedCart}>
-                    <button className="order-btn">Place Your Order</button>
+                    <button onClick={handleProceedCheckout} className="order-btn">Proceed Checkout</button>
                 </Cart>
             </div>
         </div>
