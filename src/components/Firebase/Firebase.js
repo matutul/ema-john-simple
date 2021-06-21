@@ -39,3 +39,25 @@ export const userSignInWithEmailAndPassword = (registeredUser) => {
             return error;
         });
 }
+
+export const userSignInWithGoogle = () => {
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth()
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+            return result.user;
+        }).catch((error) => {
+            return error;
+        });
+}
+export const userSignInWithFacebook = () => {
+    const fbProvider = new firebase.auth.FacebookAuthProvider();
+    return firebase.auth()
+        .signInWithPopup(fbProvider)
+        .then((result) => {
+            return result.user;
+        })
+        .catch((error) => {
+            return error;
+        });
+}

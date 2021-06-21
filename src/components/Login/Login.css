@@ -38,6 +38,12 @@
     margin: 8px;
     padding: 3px 15px;
     font-size: 20px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+}
+.auth-form input:focus{
+    outline: 0;
+    border: 1px solid rgb(156, 156, 156);
 }
 #submit-btn{
     align-self: center;
@@ -54,4 +60,22 @@
 #submit-btn:hover{
     background-color: rgb(56, 199, 255);
     box-shadow: 1px 1px 5px rgba(00, 00, 00, .5);
+}
+.signing-btn{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    align-items: center;
+    margin: 10px 0;
+    box-shadow: 1px 1px 10px rgba(173, 173, 173, 0.541);
+}
+.btn-icon{
+    width: 35px;
+    /* align-self: flex-start; */
+    margin-right: 20px;
+}
+.btn-txt{
+    width: 100%;
 }

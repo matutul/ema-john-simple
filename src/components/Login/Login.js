@@ -1,9 +1,13 @@
-import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useContext, useState } from 'react/cjs/react.development';
-import { UserContext } from '../../App';
-import { initializeFirebaseAppFramework, newUserCreateWithEmailPassword, userSignInWithEmailAndPassword } from '../Firebase/Firebase';
 import './Login.css';
+import { Button } from 'react-bootstrap';
+import React from 'react';
+import { initializeFirebaseAppFramework, newUserCreateWithEmailPassword, userSignInWithEmailAndPassword, userSignInWithFacebook, userSignInWithGoogle } from '../Firebase/Firebase';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { useState } from 'react';
+import { UserContext } from '../../App';
+import googleIcon from '../../icons/google.svg';
+import facebookIcon from '../../icons/facebook.svg';
 
 initializeFirebaseAppFramework();
 
@@ -84,17 +88,16 @@ const Login = () => {
     // handleSubmit >> sign up or sign in ====================================== SIGN UP OR SIGN IN ================================================
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(isNewUser, user);
         if (isNewUser && user.email && user.password) {
             newUserCreateWithEmailPassword(user)
                 .then(res => {
-                    console.log(res);
                     const responseKey = Object.keys(res);
                     if (responseKey.find(key => key === "displayName")) {
-                        setLoggedInUser(res);
+                        alert(`Hello ${user.fullname}, Your sign up is successfull. Sign in now.`);
+                        setIsNewUser(false);
                     }
                     if (responseKey.find(key => key === "code")) {
-                        console.log(res.errorCode, res.errorMessage);
+                        alert(res.message);
                     }
                 })
 
@@ -115,7 +118,40 @@ const Login = () => {
                 })
         }
 
-    }// END of handleSubmit >> sign up or sign in
+    }
+    // END of handleSubmit >> sign up or sign in
+
+
+    const handleGoogleSignIn = () => {
+        userSignInWithGoogle()
+            .then(res => {
+                const responseKey = Object.keys(res);
+                if (responseKey.find(key => key === "displayName")) {
+                    setLoggedInUser(res);
+                    alert("Sign in is successfull");
+                    history.replace(from);
+                }
+                if (responseKey.find(key => key === "code")) {
+                    alert(res.message);
+                }
+            })
+    }
+    const handleFacebookSignIn = () => {
+        userSignInWithFacebook()
+            .then(res => {
+                const responseKey = Object.keys(res);
+                if (responseKey.find(key => key === "displayName")) {
+                    setLoggedInUser(res);
+                    alert("Sign in is successfull");
+                    history.replace(from);
+
+                }
+                if (responseKey.find(key => key === "code")) {
+                    alert(res.message);
+                }
+            });
+    }
+
 
     return (
         <div className="auth-section">
@@ -140,6 +176,12 @@ const Login = () => {
                         isNewUser && <p style={{ color: 'red' }}>{validPassword.isValidPassword ? validPassword.isPasswordMatch : validPassword.isValidPasswordMessage}</p>
                     }
                     <input id="submit-btn" type="submit" value="Submit" />
+                    <Button variant="light" onClick={handleGoogleSignIn} className="signing-btn">
+                        <img className="btn-icon" src={googleIcon} alt="" /><span className="btn-txt"> Continue with Google</span>
+                    </Button>
+                    <Button className="signing-btn" variant="light" onClick={handleFacebookSignIn} className="signing-btn">
+                        <img className="btn-icon" src={facebookIcon} alt="" /> <span className="btn-txt"> Continue with Facebook</span>
+                    </Button>
                 </form>
             </div>
         </div>
