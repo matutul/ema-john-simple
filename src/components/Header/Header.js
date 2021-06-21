@@ -1,6 +1,6 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react/cjs/react.development';
 import { UserContext } from '../../App';
 import logo from '../../images/logo.png';
 import './Header.css';
