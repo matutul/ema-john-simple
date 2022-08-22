@@ -20,7 +20,7 @@ const Shipment = () => {
         if (itemsOfOrderedProduct.length) {
             const order = { userName: loggedInUser.displayName, userEmail: loggedInUser.email, ship: { ...data }, order: { ...orderedProduct }, orderTime: new Date() };
             console.log(order);
-            fetch('http://localhost:4000/addOrder', {
+            fetch('https://ema-john-server0.herokuapp.com/addOrder', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(order)

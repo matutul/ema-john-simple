@@ -9,7 +9,7 @@ const Review = () => {
     useEffect(() => {
         const savedProduct = getDatabaseCart();
         const savedProductKey = Object.keys(savedProduct);
-        fetch('http://localhost:4000/productsByKeys', {
+        fetch('https://ema-john-server0.herokuapp.com/productsByKeys', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(savedProductKey)
