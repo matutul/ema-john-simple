@@ -5,6 +5,7 @@ const Cart = (props) => {
     let total = 0, shippingCharge = 0, beforeTax = 0, tax = 0, orderTotal = 0, itemNumber = 0;
     for (let i = 0; i < props.cart.length; i++) {
         const element = props.cart[i];
+        console.log(element.quantity);
         itemNumber = itemNumber + element.quantity;
         total = total + (element.price * element.quantity);
     }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import fakeData from '../../fakeData';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
@@ -11,24 +10,32 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        const pd = fakeData.splice(0, 10);
-        setProducts(pd);
+        fetch('http://localhost:4000/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
     }, [])
 
 
     useEffect(() => {
         const savedProduct = getDatabaseCart();
-        console.log(savedProduct);
         const savedProductKey = Object.keys(savedProduct);
-        console.log(savedProductKey);
-        const addedToBeCart = savedProductKey.map(key => {
-            const product = fakeData.find(pd => key === pd.key);
-            product.quantity = savedProduct[key];
-            return product;
-        });
-        setCart(addedToBeCart);
+        fetch('http://localhost:4000/productsByKeys', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(savedProductKey)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const product = savedProductKey.map(key => {
+                const cartProduct = data.find(pd => pd.key === key);
+                cartProduct.quantity = savedProduct[key];
+                return cartProduct;
+            })
+            setCart(product);
+        })
     }, [])
 
+    console.log(cart);
 
     const addProductHandler = (product) => {
         console.log(product);
@@ -53,12 +60,17 @@ const Shop = () => {
         <div className='shop-container'>
             <div className="product-container">
                 {
-                    products.map(pd => <Product
-                        showAddtoBtn={true}
-                        addProductHandler={addProductHandler}
-                        key={pd.key}
-                        product={pd}
-                    ></Product>)
+                    !products.length ? <div class="d-flex justify-content-center">
+                        <div class="spinner-border mt-5 text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div> :
+                        products.map(pd => <Product
+                            showAddtoBtn={true}
+                            addProductHandler={addProductHandler}
+                            key={pd.key}
+                            product={pd}
+                        ></Product>)
                 }
             </div>
             <div className="cart-container">

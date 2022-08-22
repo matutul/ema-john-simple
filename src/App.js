@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -10,11 +11,11 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login/Login';
 import Shipment from './components/Shipment/Shipment';
 import { createContext, useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ManageInventory from './components/ManageInventory/ManageInventory';
 
 
 export const UserContext = createContext();
@@ -37,6 +38,9 @@ function App() {
           <Route path="/review">
             <Review />
           </Route>
+          <Route path="/inventory">
+            <ManageInventory />
+          </Route>
           <Route path="/contact">
             <Contact />
           </Route>
@@ -47,7 +51,7 @@ function App() {
           <PrivateRoute path="/shipment">
             <Shipment></Shipment>
           </PrivateRoute>
-          
+
           <Route path="/product/:productKey">
             <ProductDetails />
           </Route>

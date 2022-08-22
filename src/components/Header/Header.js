@@ -13,6 +13,7 @@ const Header = () => {
             <nav>
                 <Link to="/shop">Shop</Link>
                 <Link to="/review">Order Riveiw</Link>
+                <Link to="/inventory">Manage Inventory</Link>
                 <Link to="/contact">Contact</Link>
                 {
                     loggedInUser.displayName && <div className="user-div">
